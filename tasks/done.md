@@ -10,3 +10,7 @@
 ### Layer 1 - UI Components
 - [x] Create Reusable UI Components (Button, Input, Card)
 - [x] Setup Tailwind theme/config
+
+### Layer 2 - Logic (Calculators)
+- [x] Implement Calculator logic (BMI, TDEE, Calories)
+- [x] Create Calculator UI forms and result display
