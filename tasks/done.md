@@ -14,3 +14,7 @@
 ### Layer 2 - Logic (Calculators)
 - [x] Implement Calculator logic (BMI, TDEE, Calories)
 - [x] Create Calculator UI forms and result display
+- [x] Integrate calculators into homepage
+- [x] Unit test setup (Basic tests created in tests/unit/)
+
+# Phase 1: Status = ✅ COMPLETE

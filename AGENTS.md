@@ -181,8 +181,8 @@ Flow: **Task → Pre-Code → Code → Post-Code → Commit**
 
 ## Phase & Task
 
-- **Current Phase:** Phase 1 — Foundation & Tools (In Progress)
-- **Current Layer:** Layer 1 — UI Components (In Progress)
+- **Current Phase:** Phase 2 — AI Features (In Progress)
+- **Current Layer:** Layer 0 — AI Foundation (In Progress)
 - **Implementation Plan:** xem `docs/IMPLEMENTATION_PLAN.md`
 - **Phase details:** xem `docs/phases/phase-0.md`
 - **Tasks:** xem `tasks/layer-0-todo.md`
