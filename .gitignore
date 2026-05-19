@@ -7,15 +7,26 @@ node_modules/
 # Build
 dist/
 build/
+.next/
+out/
 __pycache__/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
 
 # Environment
 .env
 .env.local
+.env.*.local
 
 # OS
 .DS_Store
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
 # Memory (private session logs)
 memory/*.md
@@ -24,11 +35,13 @@ memory/*.md
 # Code-Review-Graph (knowledge graph cache — regenerate with code-review-graph build)
 .code-review-graph/
 
-
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+
+# ESLint
+.eslintcache
 
 /src/generated/prisma
