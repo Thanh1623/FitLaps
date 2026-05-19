@@ -20,27 +20,34 @@ export default function BMICalculator() {
   };
 
   return (
-    <Card className="max-w-md mx-auto">
+    <Card className="max-w-md mx-auto border-emerald-500/20">
       <CardHeader>
-        <CardTitle>BMI Calculator</CardTitle>
+        <CardTitle className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent">BMI Calculator</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <Input 
-          type="number" 
-          placeholder="Weight (kg)" 
-          value={weight} 
-          onChange={(e) => setWeight(e.target.value)} 
-        />
-        <Input 
-          type="number" 
-          placeholder="Height (cm)" 
-          value={height} 
-          onChange={(e) => setHeight(e.target.value)} 
-        />
-        <Button onClick={handleCalculate} className="w-full">Calculate</Button>
+      <CardContent className="space-y-6">
+        <div className="space-y-2">
+            <label className="text-sm text-slate-400 font-medium">Weight (kg)</label>
+            <Input 
+              type="number" 
+              placeholder="e.g. 70" 
+              value={weight} 
+              onChange={(e) => setWeight(e.target.value)} 
+            />
+        </div>
+        <div className="space-y-2">
+            <label className="text-sm text-slate-400 font-medium">Height (cm)</label>
+            <Input 
+              type="number" 
+              placeholder="e.g. 175" 
+              value={height} 
+              onChange={(e) => setHeight(e.target.value)} 
+            />
+        </div>
+        <Button onClick={handleCalculate} variant="neon" className="w-full text-lg font-bold">Calculate BMI</Button>
         {result !== null && (
-          <div className="text-center text-xl font-bold pt-4">
-            BMI: {result}
+          <div className="text-center space-y-1 p-4 bg-slate-900 rounded-2xl border border-slate-800">
+            <p className="text-sm text-slate-400">Your BMI is</p>
+            <p className="text-5xl font-extrabold text-emerald-400">{result}</p>
           </div>
         )}
       </CardContent>
