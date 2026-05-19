@@ -30,3 +30,5 @@ memory/*.md
 .vscode/
 *.swp
 *.swo
+
+/src/generated/prisma
