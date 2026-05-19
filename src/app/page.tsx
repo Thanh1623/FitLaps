@@ -1,6 +1,7 @@
 import BMICalculator from "@/components/calculators/BMICalculator";
 import TDEECalculator from "@/components/calculators/TDEECalculator";
 import MacroCalculator from "@/components/calculators/MacroCalculator";
+import WorkoutForm from "@/components/ai/WorkoutForm";
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
         <TDEECalculator />
         <MacroCalculator />
       </div>
+      <section className="mt-12">
+        <WorkoutForm />
+      </section>
     </main>
   );
 }
