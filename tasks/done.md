@@ -24,3 +24,9 @@
 - [x] Setup OpenAI SDK
 - [x] Implement AI Service (Base)
 - [x] Add .env keys instruction
+
+### Layer 1 - AI Workout Generator
+- [x] Define API Schema for Workout Generation
+- [x] Create AI Workout Generator API Endpoint
+- [x] Build AI Workout UI Form
+- [x] Implement AI Workout Result Display
