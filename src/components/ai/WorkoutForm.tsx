@@ -69,8 +69,11 @@ export default function WorkoutForm() {
         </form>
         
         {result && (
-          <div className="mt-6 p-4 bg-slate-900 rounded-2xl border border-slate-800 text-slate-300 whitespace-pre-line">
-            {result}
+          <div className="mt-6 p-6 bg-slate-900 rounded-3xl border border-emerald-500/20 text-slate-100">
+            <h3 className="text-xl font-bold mb-4 text-emerald-400">Your Generated Plan</h3>
+            <div className="prose prose-invert prose-sm text-slate-300">
+                {result}
+            </div>
           </div>
         )}
       </CardContent>
