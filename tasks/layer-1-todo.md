@@ -1,4 +1,7 @@
-# Layer 1 Todo: UI Components
+# Layer 1 Todo: AI Workout Generator
 
-- [ ] Create Reusable UI Components (Button, Input, Card) [Priority: High]
-- [ ] Setup Tailwind theme/config [Priority: Medium]
+- [ ] Define API Schema for Workout Generation [Priority: High]
+- [ ] Create AI Workout Generator API Endpoint [Priority: High]
+- [ ] Build AI Workout UI Form [Priority: High]
+- [ ] Implement AI Workout Result Display [Priority: High]
+- [ ] Unit tests for Workout Service [Priority: Medium]

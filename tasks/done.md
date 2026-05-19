@@ -18,3 +18,9 @@
 - [x] Unit test setup (Basic tests created in tests/unit/)
 
 # Phase 1: Status = ✅ COMPLETE
+
+## Phase 2
+### Layer 0 - AI Foundation
+- [x] Setup OpenAI SDK
+- [x] Implement AI Service (Base)
+- [x] Add .env keys instruction
