@@ -94,10 +94,16 @@ KHÔNG viết code, KHÔNG scaffold, KHÔNG implement cho đến khi có file sp
 ---
 
 ## Stack
-[Điền sau Phase 0]
+- Framework: Next.js (App Router)
+- Styling: Tailwind CSS
+- Database: PostgreSQL + Prisma
+- AI: OpenAI API
 
 ## Folder Structure
-[Điền sau Phase 0]
+- src/: Source code (app, components, lib, services)
+- docs/: Documentation
+- tasks/: Task tracking
+- scripts/: Automation scripts
 
 ---
 
@@ -175,8 +181,8 @@ Flow: **Task → Pre-Code → Code → Post-Code → Commit**
 
 ## Phase & Task
 
-- **Current Phase:** Phase 0 — Planning (chưa bắt đầu)
-- **Current Layer:** Layer 0 — Foundation (chưa bắt đầu)
+- **Current Phase:** Phase 1 — Foundation & Tools (In Progress)
+- **Current Layer:** Layer 0 — Foundation (In Progress)
 - **Implementation Plan:** xem `docs/IMPLEMENTATION_PLAN.md`
 - **Phase details:** xem `docs/phases/phase-0.md`
 - **Tasks:** xem `tasks/layer-0-todo.md`
