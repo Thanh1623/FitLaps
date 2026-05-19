@@ -1,7 +1,10 @@
+import BMICalculator from "@/components/calculators/BMICalculator";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>FitLaps</h1>
+    <main className="flex min-h-screen flex-col items-center justify-center p-12 space-y-8">
+      <h1 className="text-4xl font-bold">FitLaps Tools</h1>
+      <BMICalculator />
     </main>
   );
 }
