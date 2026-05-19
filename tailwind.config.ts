@@ -9,8 +9,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        emerald: {
+          400: "#34d399",
+          500: "#10b981",
+        },
+        blue: {
+          600: "#2563eb",
+          700: "#1d4ed8",
+        },
+      },
+      borderRadius: {
+        xl: "1rem",
+        "2xl": "1.5rem",
       },
     },
   },
