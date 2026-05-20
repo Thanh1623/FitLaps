@@ -113,7 +113,7 @@ export default function MealPlannerForm() {
             {result && (
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Feedback for regeneration:</label>
-                    <textarea name="feedback" className="w-full p-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-sm" placeholder="e.g. Make the meals lighter, add more high-protein snacks, or reduce carb content..."></textarea>
+                    <textarea name="feedback" className="w-full p-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-sm" placeholder="e.g. Only use these ingredients: chicken, pork, mango, cabbage... or exclude dairy/nuts."></textarea>
                 </div>
             )}
 
