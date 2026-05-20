@@ -14,6 +14,7 @@ export async function POST(req: Request) {
     Dietary Restrictions: ${validatedData.dietaryRestrictions}
     Calorie Target: ${validatedData.calorieTarget || 'Not specified'}
     Meals Per Day: ${validatedData.mealsPerDay}
+    Duration: ${validatedData.daysCount} days
     User Feedback: ${validatedData.feedback || 'None'}
     
     Return a JSON object matching this schema. IMPORTANT: Generate the content in this language: ${validatedData.locale === 'vi' ? 'Vietnamese' : 'English'}.
