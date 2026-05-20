@@ -1,0 +1,97 @@
+{
+  "WorkoutForm": {
+    "title": "AI Tạo Lịch Tập",
+    "goal": "Mục tiêu",
+    "weight_loss": "Giảm cân",
+    "muscle_gain": "Tăng cơ",
+    "endurance": "Bền bỉ",
+    "fitnessLevel": "Trình độ",
+    "beginner": "Mới bắt đầu",
+    "intermediate": "Trung bình",
+    "advanced": "Nâng cao",
+    "equipment": "Dụng cụ",
+    "gym": "Phòng tập",
+    "home": "Tại nhà",
+    "none": "Không",
+    "duration": "Thời gian (phút)",
+    "frequency": "Tần suất (ngày/tuần)",
+    "submit": "Tạo lịch",
+    "generating": "Đang tạo..."
+  },
+  "Header": {
+    "title": "FitLaps",
+    "home": "Trang chủ",
+    "dashboard": "Bảng điều khiển"
+  },
+  "Footer": {
+    "copyright": "© 2026 FitLaps"
+  },
+  "BMICalculator": {
+    "title": "Tính BMI",
+    "weight": "Cân nặng (kg)",
+    "height": "Chiều cao (cm)",
+    "placeholder_weight": "vd: 70",
+    "placeholder_height": "vd: 175",
+    "button": "Tính BMI",
+    "result": "Chỉ số BMI của bạn là",
+    "underweight": "Thiếu cân",
+    "healthy": "Bình thường",
+    "overweight": "Thừa cân",
+    "obese": "Béo phì",
+    "info": "Chỉ số khối cơ thể (BMI) là một chỉ số đơn giản về cân nặng theo chiều cao, thường được sử dụng để phân loại tình trạng thiếu cân, thừa cân và béo phì ở người trưởng thành."
+  },
+  "TDEECalculator": {
+    "title": "Tính TDEE",
+    "weight": "Cân nặng (kg)",
+    "height": "Chiều cao (cm)",
+    "age": "Tuổi",
+    "male": "Nam",
+    "female": "Nữ",
+    "sedentary": "Ít vận động",
+    "lightly": "Vận động nhẹ",
+    "moderately": "Vận động vừa",
+    "very": "Vận động nhiều",
+    "button": "Tính TDEE",
+    "result": "Calo hàng ngày"
+  },
+  "MacroCalculator": {
+    "title": "Tính Macro",
+    "calories": "Calo hàng ngày",
+    "cut": "Giảm mỡ (Cut)",
+    "maintain": "Giữ cân",
+    "bulk": "Tăng cơ (Bulk)",
+    "button": "Tính Macro",
+    "protein": "Đạm",
+    "carbs": "Tinh bột",
+    "fat": "Béo"
+  },
+  "Home": {
+    "welcome": "Chào mừng đến FitLaps",
+    "subtitle": "Người bạn đồng hành AI của bạn",
+    "bmi_title": "Tính BMI",
+    "bmi_desc": "Kiểm tra chỉ số khối cơ thể.",
+    "tdee_title": "Tính TDEE",
+    "tdee_desc": "Tính tổng năng lượng tiêu hao.",
+    "macro_title": "Tính Macro",
+    "macro_desc": "Lên kế hoạch dinh dưỡng.",
+    "workout_title": "AI Workout",
+    "workout_desc": "Tạo kế hoạch tập luyện cá nhân."
+  },
+  "Landing": {
+    "hero_title": "Đạt Mục Tiêu Thể Hình Tuyệt Đối Với AI",
+    "hero_subtitle": "FitLaps tiếp thêm sức mạnh cho hành trình sức khỏe của bạn bằng các công cụ tính toán chính xác và tính năng tạo lịch tập AI thông minh thiết kế riêng cho bạn.",
+    "cta_start": "Bắt Đầu Miễn Phí",
+    "cta_explore": "Khám Phá Tính Năng",
+    "feature_title": "Tại sao chọn FitLaps?",
+    "feature_subtitle": "Được xây dựng cho những người yêu thích thể hình, đòi hỏi sự chính xác và công nghệ thông minh.",
+    "feat1_title": "AI Workout Generator",
+    "feat1_desc": "Nhận lịch trình tập luyện tùy chỉnh sau vài giây bằng công cụ AI cực kỳ thông minh của chúng tôi.",
+    "feat2_title": "Tính Toán Thể Hình Chính Xác",
+    "feat2_desc": "Tính BMI, TDEE và Macros thời gian thực để theo dõi nhu cầu calo và dinh dưỡng của bạn.",
+    "feat3_title": "Hỗ Trợ Đa Ngôn Ngữ",
+    "feat3_desc": "Hỗ trợ hoàn toàn tiếng Anh và tiếng Việt với giao diện trực quan, thân thiện với người dùng.",
+    "cta_banner_title": "Sẵn Sàng Thay Đổi Cơ Thể Bạn?",
+    "cta_banner_subtitle": "Hãy tham gia cùng hàng ngàn người tối ưu hóa chế độ tập luyện với AI ngay hôm nay.",
+    "cta_banner_button": "Đến Bảng Điều Khiển"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "WorkoutForm": {
+    "title": "AI Workout Generator",
+    "goal": "Goal",
+    "weight_loss": "Weight Loss",
+    "muscle_gain": "Muscle Gain",
+    "endurance": "Endurance",
+    "fitnessLevel": "Fitness Level",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "equipment": "Equipment",
+    "gym": "Gym",
+    "home": "Home",
+    "none": "None",
+    "duration": "Duration (min)",
+    "frequency": "Frequency (days/week)",
+    "submit": "Generate Plan",
+    "generating": "Generating..."
+  },
+  "Header": {
+    "title": "FitLaps",
+    "home": "Home",
+    "dashboard": "Dashboard"
+  },
+  "Footer": {
+    "copyright": "© 2026 FitLaps"
+  },
+  "BMICalculator": {
+    "title": "BMI Calculator",
+    "weight": "Weight (kg)",
+    "height": "Height (cm)",
+    "placeholder_weight": "e.g. 70",
+    "placeholder_height": "e.g. 175",
+    "button": "Calculate BMI",
+    "result": "Your BMI is",
+    "underweight": "Underweight",
+    "healthy": "Healthy weight",
+    "overweight": "Overweight",
+    "obese": "Obese",
+    "info": "Body Mass Index (BMI) is a simple index of weight-for-height that is commonly used to classify underweight, overweight and obesity in adults."
+  },
+  "TDEECalculator": {
+    "title": "TDEE Calculator",
+    "weight": "Weight (kg)",
+    "height": "Height (cm)",
+    "age": "Age",
+    "male": "Male",
+    "female": "Female",
+    "sedentary": "Sedentary",
+    "lightly": "Lightly Active",
+    "moderately": "Moderately Active",
+    "very": "Very Active",
+    "button": "Calculate TDEE",
+    "result": "Daily Calories"
+  },
+  "MacroCalculator": {
+    "title": "Macro Calculator",
+    "calories": "Daily Calories",
+    "cut": "Cut (Weight Loss)",
+    "maintain": "Maintain",
+    "bulk": "Bulk (Muscle Gain)",
+    "button": "Calculate Macros",
+    "protein": "Protein",
+    "carbs": "Carbs",
+    "fat": "Fat"
+  },
+  "Home": {
+    "welcome": "Welcome to FitLaps",
+    "subtitle": "Your AI-powered fitness companion",
+    "bmi_title": "BMI Calculator",
+    "bmi_desc": "Check your body mass index.",
+    "tdee_title": "TDEE Calculator",
+    "tdee_desc": "Calculate your daily energy expenditure.",
+    "macro_title": "Macro Calculator",
+    "macro_desc": "Plan your macronutrient intake.",
+    "workout_title": "AI Workout",
+    "workout_desc": "Generate personalized plans."
+  },
+  "Landing": {
+    "hero_title": "Achieve Your Ultimate Fitness Goals with AI",
+    "hero_subtitle": "FitLaps empowers your health journey with advanced, personalized calculators and smart AI Workout Generators built just for you.",
+    "cta_start": "Get Started Free",
+    "cta_explore": "Explore Dashboard",
+    "feature_title": "Why Choose FitLaps?",
+    "feature_subtitle": "Built for fitness enthusiasts who demand precision and smart technology.",
+    "feat1_title": "AI Workout Generator",
+    "feat1_desc": "Get tailored workout schedules in seconds using our highly sophisticated AI engine.",
+    "feat2_title": "Accurate Fitness Calculators",
+    "feat2_desc": "Calculate BMI, TDEE, and Macros in real-time to track your calorie and nutrition needs.",
+    "feat3_title": "Multi-language Support",
+    "feat3_desc": "Accessible in both English and Vietnamese with localized options and friendly UI.",
+    "cta_banner_title": "Ready to Transform Your Body?",
+    "cta_banner_subtitle": "Join thousands of users optimizing their fitness routine with AI today.",
+    "cta_banner_button": "Go to Dashboard"
+  }
+}
