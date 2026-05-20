@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/CustomSelect";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { Utensils, ChevronDown, ChevronUp } from "lucide-react";
+import { Utensils } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function MealPlannerForm() {
@@ -16,14 +16,8 @@ export default function MealPlannerForm() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
-  const [openRecipes, setOpenRecipes] = useState<Record<string, boolean>>({});
-
-  const toggleRecipe = (mealId: string) => {
-    setOpenRecipes(prev => ({ ...prev, [mealId]: !prev[mealId] }));
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    // ... (rest of handleSubmit stays same)
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -61,7 +55,6 @@ export default function MealPlannerForm() {
       }
 
       setResult(json.data);
-      setOpenRecipes({}); // Reset recipes on new result
     } catch (error) {
       console.error(error);
       setError("Network error. Please try again.");
@@ -140,47 +133,23 @@ export default function MealPlannerForm() {
                 <h3 className="text-2xl font-bold mb-4 text-emerald-600 dark:text-emerald-400">Your Generated Plan</h3>
                 
                 <div className="space-y-6">
-                                {result.mealPlan.days?.map((dayPlan: any, index: number) => (
+                    {result.mealPlan.days?.map((dayPlan: any, index: number) => (
                         <div key={index} className="bg-slate-200 dark:bg-slate-950 p-5 rounded-2xl border border-emerald-500/10">
                             <h4 className="text-lg font-semibold text-emerald-700 dark:text-emerald-300 mb-3">{dayPlan.day}</h4>
                             
                             <div className="space-y-2">
-                                {dayPlan.meals?.map((meal: any, mIndex: number) => {
-                                    const mealId = `${index}-${mIndex}`;
-                                    const isOpen = openRecipes[mealId];
-                                    return (
-                                        <div key={mIndex} className="bg-slate-300 dark:bg-slate-900 p-3 rounded-lg text-sm">
-                                            <div className="flex justify-between items-center mb-1">
-                                                <span className="font-bold text-slate-800 dark:text-slate-200">{meal.name}</span>
-                                                <span className="text-xs text-emerald-600 dark:text-emerald-400 uppercase">{meal.type}</span>
-                                            </div>
-                                            <div className="text-slate-600 dark:text-slate-400 flex justify-between items-center">
-                                                <span>{meal.calories} kcal | P: {meal.protein}g | C: {meal.carbs}g | F: {meal.fat}g</span>
-                                                {meal.recipe && (
-                                                    <button 
-                                                        onClick={() => toggleRecipe(mealId)}
-                                                        className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-semibold hover:underline"
-                                                    >
-                                                        {isOpen ? "Hide Recipe" : "View Recipe"}
-                                                        {isOpen ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                                                    </button>
-                                                )}
-                                            </div>
-                                            <AnimatePresence>
-                                                {isOpen && meal.recipe && (
-                                                    <motion.p 
-                                                        initial={{ height: 0, opacity: 0 }}
-                                                        animate={{ height: "auto", opacity: 1 }}
-                                                        exit={{ height: 0, opacity: 0 }}
-                                                        className="mt-3 text-slate-500 dark:text-slate-400 italic text-sm border-t border-slate-400/20 pt-2"
-                                                    >
-                                                        {meal.recipe}
-                                                    </motion.p>
-                                                )}
-                                            </AnimatePresence>
+                                {dayPlan.meals?.map((meal: any, mIndex: number) => (
+                                    <div key={mIndex} className="bg-slate-300 dark:bg-slate-900 p-3 rounded-lg text-sm">
+                                        <div className="flex justify-between items-center mb-1">
+                                            <span className="font-bold text-slate-800 dark:text-slate-200">{meal.name}</span>
+                                            <span className="text-xs text-emerald-600 dark:text-emerald-400 uppercase">{meal.type}</span>
                                         </div>
-                                    );
-                                })}
+                                        <div className="text-slate-600 dark:text-slate-400">
+                                            {meal.calories} kcal | P: {meal.protein}g | C: {meal.carbs}g | F: {meal.fat}g
+                                        </div>
+                                        {meal.recipe && <p className="mt-2 text-slate-500 italic">{meal.recipe}</p>}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     ))}
