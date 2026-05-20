@@ -30,6 +30,7 @@ export default function WorkoutForm() {
       equipment: formData.get("equipment"),
       durationMinutes: parseInt(formData.get("durationMinutes") as string),
       frequencyPerWeek: parseInt(formData.get("frequencyPerWeek") as string),
+      feedback: formData.get("feedback") as string || undefined,
       locale: locale,
     };
 
@@ -124,8 +125,15 @@ export default function WorkoutForm() {
             <Input name="durationMinutes" type="number" placeholder={t("duration")} required className="bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-slate-800" />
             <Input name="frequencyPerWeek" type="number" placeholder={t("frequency")} required className="bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-slate-800" />
             
+            {result && (
+                <div className="space-y-2">
+                    <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Feedback for regeneration:</label>
+                    <textarea name="feedback" className="w-full p-2 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-sm" placeholder="Tell the AI what you'd like to change..."></textarea>
+                </div>
+            )}
+
             <Button type="submit" variant="neon" className="w-full text-lg font-bold" disabled={loading}>
-              {loading ? t("generating") : t("submit")}
+              {loading ? t("generating") : (result ? "Regenerate Plan" : t("submit"))}
             </Button>
           </form>
           

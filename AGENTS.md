@@ -182,7 +182,7 @@ Flow: **Task → Pre-Code → Code → Post-Code → Commit**
 ## Phase & Task
 
 - **Current Phase:** Phase 2 — AI Features (In Progress)
-- **Current Layer:** Layer 1 — AI Workout Generator (In Progress)
+- **Current Layer:** Layer 3 — Feedback & Refinement (Pending)
 - **Implementation Plan:** xem `docs/IMPLEMENTATION_PLAN.md`
 - **Phase details:** xem `docs/phases/phase-0.md`
 - **Tasks:** xem `tasks/layer-0-todo.md`

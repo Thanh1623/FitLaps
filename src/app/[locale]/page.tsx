@@ -48,7 +48,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Feature 1 */}
           <Card className="border-emerald-500/10 hover:border-emerald-500/20 hover:bg-slate-100 dark:hover:bg-slate-900/30 transition-all p-8 flex flex-col justify-between h-full">
             <div>
@@ -65,7 +65,23 @@ export default function HomePage() {
             </div>
           </Card>
 
-          {/* Feature 2 */}
+          {/* Feature 2 (Meal Planner) */}
+          <Card className="border-emerald-500/10 hover:border-emerald-500/20 hover:bg-slate-100 dark:hover:bg-slate-900/30 transition-all p-8 flex flex-col justify-between h-full">
+            <div>
+              <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-2xl font-bold mb-6 border border-emerald-500/20">
+                🥗
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-slate-100">{t("feat3_title")}</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{t("feat3_desc")}</p>
+            </div>
+            <div className="mt-6">
+              <Link href="/meal-planner" className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 font-semibold text-sm inline-flex items-center gap-1 group">
+                Try Meal AI <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
+          </Card>
+
+          {/* Feature 3 (Calculators) */}
           <Card className="border-blue-500/10 hover:border-blue-500/20 hover:bg-slate-100 dark:hover:bg-slate-900/30 transition-all p-8 flex flex-col justify-between h-full">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 text-2xl font-bold mb-6 border border-blue-500/20">
@@ -83,14 +99,14 @@ export default function HomePage() {
             </div>
           </Card>
 
-          {/* Feature 3 */}
+          {/* Feature 4 (Localization) */}
           <Card className="border-emerald-500/10 hover:border-emerald-500/20 hover:bg-slate-100 dark:hover:bg-slate-900/30 transition-all p-8 flex flex-col justify-between h-full">
             <div>
               <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-2xl font-bold mb-6 border border-emerald-500/20">
                 🌐
               </div>
-              <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-slate-100">{t("feat3_title")}</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{t("feat3_desc")}</p>
+              <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-slate-100">{t("feat4_title")}</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{t("feat4_desc")}</p>
             </div>
             <div className="mt-6">
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold text-sm">EN & VI Enabled</span>

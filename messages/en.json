@@ -18,6 +18,23 @@
     "submit": "Generate Plan",
     "generating": "Generating..."
   },
+  "MealPlannerForm": {
+    "title": "AI Meal Planner",
+    "goal": "Goal",
+    "weight_loss": "Weight Loss",
+    "maintenance": "Maintenance",
+    "muscle_gain": "Muscle Gain",
+    "dietaryRestrictions": "Dietary Restrictions",
+    "none": "None",
+    "vegan": "Vegan",
+    "keto": "Keto",
+    "paleo": "Paleo",
+    "gluten_free": "Gluten Free",
+    "calorieTarget": "Calorie Target",
+    "mealsPerDay": "Meals Per Day",
+    "submit": "Generate Plan",
+    "generating": "Generating..."
+  },
   "Header": {
     "title": "FitLaps",
     "home": "Home",
@@ -75,7 +92,9 @@
     "macro_title": "Macro Calculator",
     "macro_desc": "Plan your macronutrient intake.",
     "workout_title": "AI Workout",
-    "workout_desc": "Generate personalized plans."
+    "workout_desc": "Generate personalized plans.",
+    "meal_planner_title": "AI Meal Planner",
+    "meal_planner_desc": "Get personalized meal plans."
   },
   "Landing": {
     "hero_title": "Achieve Your Ultimate Fitness Goals with AI",
@@ -88,8 +107,10 @@
     "feat1_desc": "Get tailored workout schedules in seconds using our highly sophisticated AI engine.",
     "feat2_title": "Accurate Fitness Calculators",
     "feat2_desc": "Calculate BMI, TDEE, and Macros in real-time to track your calorie and nutrition needs.",
-    "feat3_title": "Multi-language Support",
-    "feat3_desc": "Accessible in both English and Vietnamese with localized options and friendly UI.",
+    "feat3_title": "AI Meal Planner",
+    "feat3_desc": "Get personalized meal plans based on your goals and dietary restrictions.",
+    "feat4_title": "Multi-language Support",
+    "feat4_desc": "Accessible in both English and Vietnamese with localized options and friendly UI.",
     "cta_banner_title": "Ready to Transform Your Body?",
     "cta_banner_subtitle": "Join thousands of users optimizing their fitness routine with AI today.",
     "cta_banner_button": "Go to Dashboard"

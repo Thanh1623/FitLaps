@@ -18,6 +18,23 @@
     "submit": "Tạo lịch",
     "generating": "Đang tạo..."
   },
+  "MealPlannerForm": {
+    "title": "AI Tạo Lịch Ăn",
+    "goal": "Mục tiêu",
+    "weight_loss": "Giảm cân",
+    "maintenance": "Giữ cân",
+    "muscle_gain": "Tăng cơ",
+    "dietaryRestrictions": "Chế độ ăn kiêng",
+    "none": "Không",
+    "vegan": "Thuần chay",
+    "keto": "Keto",
+    "paleo": "Paleo",
+    "gluten_free": "Không chứa Gluten",
+    "calorieTarget": "Mục tiêu Calo",
+    "mealsPerDay": "Số bữa mỗi ngày",
+    "submit": "Tạo lịch",
+    "generating": "Đang tạo..."
+  },
   "Header": {
     "title": "FitLaps",
     "home": "Trang chủ",
@@ -75,7 +92,9 @@
     "macro_title": "Tính Macro",
     "macro_desc": "Lên kế hoạch dinh dưỡng.",
     "workout_title": "AI Workout",
-    "workout_desc": "Tạo kế hoạch tập luyện cá nhân."
+    "workout_desc": "Tạo kế hoạch tập luyện cá nhân.",
+    "meal_planner_title": "AI Meal Planner",
+    "meal_planner_desc": "Tạo kế hoạch ăn uống cá nhân."
   },
   "Landing": {
     "hero_title": "Đạt Mục Tiêu Thể Hình Tuyệt Đối Với AI",
@@ -88,8 +107,10 @@
     "feat1_desc": "Nhận lịch trình tập luyện tùy chỉnh sau vài giây bằng công cụ AI cực kỳ thông minh của chúng tôi.",
     "feat2_title": "Tính Toán Thể Hình Chính Xác",
     "feat2_desc": "Tính BMI, TDEE và Macros thời gian thực để theo dõi nhu cầu calo và dinh dưỡng của bạn.",
-    "feat3_title": "Hỗ Trợ Đa Ngôn Ngữ",
-    "feat3_desc": "Hỗ trợ hoàn toàn tiếng Anh và tiếng Việt với giao diện trực quan, thân thiện với người dùng.",
+    "feat3_title": "AI Meal Planner",
+    "feat3_desc": "Nhận kế hoạch bữa ăn cá nhân hóa dựa trên mục tiêu và chế độ ăn kiêng của bạn.",
+    "feat4_title": "Hỗ Trợ Đa Ngôn Ngữ",
+    "feat4_desc": "Hỗ trợ hoàn toàn tiếng Anh và tiếng Việt với giao diện trực quan, thân thiện với người dùng.",
     "cta_banner_title": "Sẵn Sàng Thay Đổi Cơ Thể Bạn?",
     "cta_banner_subtitle": "Hãy tham gia cùng hàng ngàn người tối ưu hóa chế độ tập luyện với AI ngay hôm nay.",
     "cta_banner_button": "Đến Bảng Điều Khiển"

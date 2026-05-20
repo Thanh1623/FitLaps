@@ -15,6 +15,7 @@ export async function POST(req: Request) {
     Equipment: ${validatedData.equipment}
     Duration: ${validatedData.durationMinutes} minutes
     Frequency: ${validatedData.frequencyPerWeek} days per week.
+    User Feedback: ${validatedData.feedback || 'None'}
     
     Return a JSON object matching this schema. IMPORTANT: Generate the content in this language: ${validatedData.locale === 'vi' ? 'Vietnamese' : 'English'}.
     
