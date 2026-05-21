@@ -17,6 +17,7 @@ export default function Header() {
   const navLinks = [
     { href: "/", label: t("home") },
     { href: "/dashboard", label: t("dashboard") },
+    { href: "/history", label: "History" },
   ];
 
   return (
@@ -30,8 +31,8 @@ export default function Header() {
             <Link 
               key={link.href} 
               href={link.href} 
-              className={`text-xs sm:text-sm font-medium transition-colors px-1 sm:px-2 ${
-                (pathname === "/" && link.href === "/") || (pathname.startsWith("/dashboard") && link.href === "/dashboard")
+               className={`text-xs sm:text-sm font-medium transition-colors px-1 sm:px-2 ${
+                (pathname === "/" && link.href === "/") || (pathname.startsWith(link.href) && link.href !== "/")
                   ? "text-emerald-600 dark:text-emerald-400 font-semibold"
                   : "text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400"
               }`}

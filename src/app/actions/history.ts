@@ -1,11 +1,26 @@
 'use server'
 
-import "dotenv/config"
 import { createClient } from '@/lib/supabase/server'
-import { PrismaClient } from '@/generated/prisma'
+import { prisma } from '@/lib/db'
 
-const getPrisma = () => {
-    return new PrismaClient()
+import { revalidatePath } from 'next/cache'
+
+export async function deletePlanHistory(id: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error('Unauthorized')
+  }
+
+  await prisma.planHistory.delete({
+    where: {
+      id,
+      userId: user.id, // Ensure user owns the record
+    },
+  })
+
+  revalidatePath('/[locale]/history', 'page')
 }
 
 export async function savePlanHistory(planType: string, planData: any) {
@@ -16,7 +31,20 @@ export async function savePlanHistory(planType: string, planData: any) {
     throw new Error('Unauthorized')
   }
 
-  const prisma = getPrisma()
+  // Ensure user exists in our database
+  let dbUser = await prisma.user.findUnique({
+    where: { id: user.id },
+  })
+
+  if (!dbUser) {
+    dbUser = await prisma.user.create({
+      data: {
+        id: user.id,
+        email: user.email ?? null,
+      },
+    })
+  }
+
   const history = await prisma.planHistory.create({
     data: {
       userId: user.id,
@@ -36,7 +64,6 @@ export async function getPlanHistory() {
     return []
   }
 
-  const prisma = getPrisma()
   const history = await prisma.planHistory.findMany({
     where: {
       userId: user.id,

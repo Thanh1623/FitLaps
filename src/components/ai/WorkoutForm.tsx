@@ -27,7 +27,7 @@ export default function WorkoutForm() {
         setSaved(true);
     } catch (e) {
         console.error(e);
-        setError("Failed to save plan. Are you logged in?");
+        setError("You must be logged in to save plans. Please sign in.");
     } finally {
         setSaving(false);
     }
@@ -168,7 +168,7 @@ export default function WorkoutForm() {
               >
                 <div className="flex justify-between items-start mb-4">
                     <h3 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">Your Generated Plan</h3>
-                    <Button onClick={handleSave} disabled={saving || saved} variant="outline" className="gap-2">
+                    <Button onClick={handleSave} disabled={saving || saved} variant="neon" className="gap-2">
                         {saved ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
                         {saved ? "Saved" : "Save Plan"}
                     </Button>
