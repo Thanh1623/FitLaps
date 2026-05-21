@@ -18,6 +18,10 @@
     "submit": "Tạo lịch",
     "generating": "Đang tạo..."
   },
+  "WorkoutMetadata": {
+    "title": "AI Tạo Lịch Tập | FitLaps",
+    "description": "Tạo lịch tập luyện cá nhân hóa bằng AI dựa trên mục tiêu, trình độ và dụng cụ của bạn."
+  },
   "MealPlannerForm": {
     "title": "AI Tạo Lịch Ăn",
     "goal": "Mục tiêu",
@@ -35,10 +39,25 @@
     "submit": "Tạo lịch",
     "generating": "Đang tạo..."
   },
-  "Header": {
-    "title": "FitLaps",
-    "home": "Trang chủ",
-    "dashboard": "Bảng điều khiển"
+  "MealPlannerMetadata": {
+    "title": "AI Tạo Lịch Ăn | FitLaps",
+    "description": "Tạo kế hoạch ăn uống cá nhân hóa bằng AI dựa trên mục tiêu và chế độ ăn kiêng của bạn."
+  },
+  "BMIMetadata": {
+    "title": "Tính BMI | FitLaps",
+    "description": "Tính chỉ số khối cơ thể (BMI) của bạn dễ dàng với máy tính trực tuyến chính xác của chúng tôi."
+  },
+  "TDEEMetadata": {
+    "title": "Tính TDEE | FitLaps",
+    "description": "Tính tổng năng lượng tiêu hao hàng ngày (TDEE) của bạn để hiểu nhu cầu calo của cơ thể."
+  },
+  "MacroMetadata": {
+    "title": "Tính Macro | FitLaps",
+    "description": "Tính nhu cầu dinh dưỡng đa lượng hàng ngày của bạn để giảm cân, giữ cân hoặc tăng cơ."
+  },
+  "DashboardMetadata": {
+    "title": "Bảng điều khiển | FitLaps",
+    "description": "Truy cập tất cả các công cụ thể hình của bạn, bao gồm BMI, TDEE, Macro, Lịch tập và Lịch ăn AI."
   },
   "Footer": {
     "copyright": "© 2026 FitLaps"

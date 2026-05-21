@@ -18,6 +18,10 @@
     "submit": "Generate Plan",
     "generating": "Generating..."
   },
+  "WorkoutMetadata": {
+    "title": "AI Workout Generator | FitLaps",
+    "description": "Get a personalized workout plan created by AI based on your goals, level, and equipment."
+  },
   "MealPlannerForm": {
     "title": "AI Meal Planner",
     "goal": "Goal",
@@ -35,6 +39,10 @@
     "submit": "Generate Plan",
     "generating": "Generating..."
   },
+  "MealPlannerMetadata": {
+    "title": "AI Meal Planner | FitLaps",
+    "description": "Get a personalized meal plan created by AI based on your goals and dietary restrictions."
+  },
   "Header": {
     "title": "FitLaps",
     "home": "Home",
@@ -43,44 +51,21 @@
   "Footer": {
     "copyright": "© 2026 FitLaps"
   },
-  "BMICalculator": {
-    "title": "BMI Calculator",
-    "weight": "Weight (kg)",
-    "height": "Height (cm)",
-    "placeholder_weight": "e.g. 70",
-    "placeholder_height": "e.g. 175",
-    "button": "Calculate BMI",
-    "result": "Your BMI is",
-    "underweight": "Underweight",
-    "healthy": "Healthy weight",
-    "overweight": "Overweight",
-    "obese": "Obese",
-    "info": "Body Mass Index (BMI) is a simple index of weight-for-height that is commonly used to classify underweight, overweight and obesity in adults."
+  "BMIMetadata": {
+    "title": "BMI Calculator | FitLaps",
+    "description": "Calculate your Body Mass Index (BMI) easily with our accurate online calculator."
   },
-  "TDEECalculator": {
-    "title": "TDEE Calculator",
-    "weight": "Weight (kg)",
-    "height": "Height (cm)",
-    "age": "Age",
-    "male": "Male",
-    "female": "Female",
-    "sedentary": "Sedentary",
-    "lightly": "Lightly Active",
-    "moderately": "Moderately Active",
-    "very": "Very Active",
-    "button": "Calculate TDEE",
-    "result": "Daily Calories"
+  "TDEEMetadata": {
+    "title": "TDEE Calculator | FitLaps",
+    "description": "Calculate your Total Daily Energy Expenditure (TDEE) to understand your caloric needs."
   },
-  "MacroCalculator": {
-    "title": "Macro Calculator",
-    "calories": "Daily Calories",
-    "cut": "Cut (Weight Loss)",
-    "maintain": "Maintain",
-    "bulk": "Bulk (Muscle Gain)",
-    "button": "Calculate Macros",
-    "protein": "Protein",
-    "carbs": "Carbs",
-    "fat": "Fat"
+  "MacroMetadata": {
+    "title": "Macro Calculator | FitLaps",
+    "description": "Calculate your daily macronutrient needs for weight loss, maintenance, or muscle gain."
+  },
+  "DashboardMetadata": {
+    "title": "Dashboard | FitLaps",
+    "description": "Access all your fitness tools, including BMI, TDEE, Macros, AI Workout and Meal Planner."
   },
   "Home": {
     "welcome": "Welcome to FitLaps",

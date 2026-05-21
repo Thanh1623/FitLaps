@@ -22,6 +22,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "FitLaps",
   description: "Fitness platform",
+  openGraph: {
+    title: "FitLaps",
+    description: "Fitness platform with AI-powered workouts, meal planners, and calculators.",
+    url: "https://fitlaps.com",
+    siteName: "FitLaps",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default async function LocaleLayout({

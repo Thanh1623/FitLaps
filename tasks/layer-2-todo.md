@@ -1,5 +1,0 @@
-- [ ] Define API Schema for Meal Planner [Priority: High]
-- [ ] Create AI Meal Planner API Endpoint [Priority: High]
-- [ ] Build AI Meal Planner UI Form [Priority: High]
-- [ ] Implement AI Meal Planner Result Display [Priority: High]
-- [ ] Unit tests for Meal Planner Service [Priority: Medium]

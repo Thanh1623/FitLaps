@@ -1,32 +1,18 @@
-# Layer Refinement — Post-Completion
-
-> Sau khi hoàn thành tất cả layers (Layer 0 → N), user check lại và báo bug hoặc feature mới.
-> File này track những thay đổi sau khi hệ thống đã "xong".
-
----
-
-## Workflow
-
-1. **User báo** → Bug hoặc feature mới
-2. **AI brainstorm** → Clarify + propose 2-3 approaches
-3. **User approve** → Confirm phương án
-4. **Tạo task** → Thêm vào bảng bên dưới
-5. **Pick + implement** → Như các layer khác
-
----
+# Layer Refinement — SEO Focus
 
 ## Tasks
 
-<!-- 
-Khi user báo bug/feature, thêm task theo format:
+### 1. Dynamic Metadata & SEO Tags
+- [ ] Implement dynamic metadata (Title/Description) for all pages per locale [Priority: High]
+- [ ] Add Open Graph (OG) tags for social sharing [Priority: Medium]
 
-### [ID] — [Title]
+### 2. Technical SEO
+- [ ] Generate dynamic `sitemap.ts` [Priority: High]
+- [ ] Create `robots.ts` [Priority: High]
 
-**Type:** Bug | Feature
-**Description:** [Mô tả vấn đề/yêu cầu]
-**Acceptance Criteria:** [Tiêu chí hoàn thành]
-**Status:** ⬜ Todo | 🔄 In Progress | ✅ Done
-**Commit:** -
--->
+### 3. Structured Data
+- [ ] Implement JSON-LD Schema for Calculators & Tools [Priority: Medium]
 
-_Chưa có tasks — sẽ được thêm sau khi hoàn thành tất cả layers._
+### 4. Semantic & Performance
+- [ ] Audit and fix Semantic HTML (heading hierarchy) [Priority: Low]
+- [ ] Optimize images (alt text, sizes) [Priority: Low]

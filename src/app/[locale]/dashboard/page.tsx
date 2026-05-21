@@ -1,7 +1,17 @@
 import { Link } from "@/i18n/routing";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/Card";
 import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Dumbbell, Utensils, Scale, Activity, Calculator } from "lucide-react";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'DashboardMetadata' });
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
 
 export default function DashboardPage() {
   const t = useTranslations("Home");
