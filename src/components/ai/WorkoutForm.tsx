@@ -50,7 +50,11 @@ export default function WorkoutForm() {
       const json = await response.json();
 
       if (!response.ok || !json.success) {
-        setError(json.error ?? "Failed to generate workout plan.");
+        let errorMessage = json.error ?? "Failed to generate workout plan.";
+        if (json.details && Array.isArray(json.details)) {
+          errorMessage += ": " + json.details.map((d: any) => `${d.path}: ${d.message}`).join(", ");
+        }
+        setError(errorMessage);
         return;
       }
 

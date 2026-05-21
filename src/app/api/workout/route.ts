@@ -7,6 +7,7 @@ import { WorkoutPlanSchema } from '@/lib/schemas/ai-workout';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    console.log('Received workout request body:', body);
     const validatedData = WorkoutRequestSchema.parse(body);
 
     const prompt = `Create a workout plan for someone with these goals:

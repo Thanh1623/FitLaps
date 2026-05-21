@@ -50,7 +50,12 @@ export default function MealPlannerForm() {
       const json = await response.json();
 
       if (!response.ok || !json.success) {
-        setError(json.error ?? "Failed to generate meal plan.");
+        // Concatenate error details if available
+        let errorMessage = json.error ?? "Failed to generate meal plan.";
+        if (json.details && Array.isArray(json.details)) {
+          errorMessage += ": " + json.details.map((d: any) => `${d.path}: ${d.message}`).join(", ");
+        }
+        setError(errorMessage);
         return;
       }
 

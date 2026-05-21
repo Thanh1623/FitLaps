@@ -7,6 +7,7 @@ import { MealPlanSchema } from '@/lib/schemas/ai-meal-planner';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    console.log('Received body:', body);
     const validatedData = MealPlannerRequestSchema.parse(body);
 
     const prompt = `Create a meal plan for someone with these goals:
