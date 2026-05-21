@@ -15,7 +15,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default function TDEEPage() {
+export default async function TDEEPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Home' });
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -37,6 +39,7 @@ export default function TDEEPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <div className="max-w-2xl mx-auto">
+            <h1 className="text-4xl font-extrabold text-center mb-8 text-slate-900 dark:text-white">{t('tdee_title')}</h1>
             <TDEECalculator />
         </div>
     </main>
