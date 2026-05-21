@@ -7,21 +7,38 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/CustomSelect";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import { Utensils } from "lucide-react";
+import { Utensils, Save, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { savePlanHistory } from "@/app/actions/history";
 
 export default function MealPlannerForm() {
   const t = useTranslations("MealPlannerForm");
   const { locale } = useParams();
   const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+        await savePlanHistory('meal', result);
+        setSaved(true);
+    } catch (e) {
+        console.error(e);
+        setError("Failed to save plan. Are you logged in?");
+    } finally {
+        setSaving(false);
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
     setResult(null);
+    setSaved(false);
     
     const formData = new FormData(e.currentTarget);
     const mealsPerDay = parseInt(formData.get("mealsPerDay") as string);
@@ -135,7 +152,13 @@ export default function MealPlannerForm() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 className="mt-6 p-6 bg-slate-100 dark:bg-slate-900 rounded-3xl border border-emerald-500/20 text-slate-800 dark:text-slate-100"
               >
-                <h3 className="text-2xl font-bold mb-4 text-emerald-600 dark:text-emerald-400">Your Generated Plan</h3>
+                <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">Your Generated Plan</h3>
+                    <Button onClick={handleSave} disabled={saving || saved} variant="outline" className="gap-2">
+                        {saved ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
+                        {saved ? "Saved" : "Save Plan"}
+                    </Button>
+                </div>
                 
                 <div className="space-y-6">
                     {result.mealPlan.days?.map((dayPlan: any, index: number) => (

@@ -45,3 +45,15 @@
 - [x] Refine AI prompts for better feedback integration
 
 # Phase 2: Status = ✅ COMPLETE
+
+## Phase 3
+### Layer 0 - Auth & Database
+- [x] Setup NextAuth.js & Database Schema
+- [x] Build Profile & Auth UI
+
+### Layer 1 - History Tracking
+- [x] Create API route/Server Action to save AI plans to `PlanHistory`
+- [x] Create UI for viewing history
+- [x] Integrate history with AI result components
+
+# Phase 3: Status = ⏳ IN PROGRESS
