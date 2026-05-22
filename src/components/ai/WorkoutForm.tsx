@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Dumbbell, Save, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { savePlanHistory } from "@/app/actions/history";
-import { RecommendationCard } from "@/components/affiliate/RecommendationCard";
+import { RecommendationSlider } from "@/components/affiliate/RecommendationSlider";
 
 export default function WorkoutForm() {
   const t = useTranslations("WorkoutForm");
@@ -233,11 +233,7 @@ export default function WorkoutForm() {
                 {recommendations && recommendations.length > 0 && (
                     <div className="mt-8 pt-6 border-t border-slate-300 dark:border-slate-800">
                         <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-4">Recommended for you</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {recommendations.map((product) => (
-                                <RecommendationCard key={product.id} product={product} />
-                            ))}
-                        </div>
+                        <RecommendationSlider products={recommendations} />
                     </div>
                 )}
               </motion.div>

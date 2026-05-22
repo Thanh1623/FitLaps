@@ -61,7 +61,6 @@ export async function getAffiliateRecommendations(plan: any) {
     return await prisma.product.findMany({
         where: {
             category: { in: uniqueCategories as string[] }
-        },
-        take: 3,
+        }
     })
 }

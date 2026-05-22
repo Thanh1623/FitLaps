@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { Dumbbell, Calendar, Target, Clock, Zap, Utensils, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { getAffiliateRecommendations } from "@/services/affiliate";
-import { RecommendationCard } from "@/components/affiliate/RecommendationCard";
+import { RecommendationSlider } from "@/components/affiliate/RecommendationSlider";
 
 export default async function HistoryPage({
   params,
@@ -178,11 +178,7 @@ export default async function HistoryPage({
                     {item.recommendations && item.recommendations.length > 0 && (
                         <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
                             <h4 className="font-semibold text-slate-900 dark:text-white mb-4">Recommended Products</h4>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {item.recommendations.map((product: any) => (
-                                    <RecommendationCard key={product.id} product={product} />
-                                ))}
-                            </div>
+                            <RecommendationSlider products={item.recommendations} />
                         </div>
                     )}
                   </CardContent>
