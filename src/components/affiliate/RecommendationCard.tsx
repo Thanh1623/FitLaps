@@ -32,7 +32,7 @@ export function RecommendationCard({ product }: RecommendationCardProps) {
       <a 
         href={product.affiliateLink} 
         target="_blank" 
-        rel="noopener noreferrer"
+        rel="noopener noreferrer nofollow"
         className="w-full"
       >
         <Button variant="default" className="w-full gap-2 bg-emerald-600 hover:bg-emerald-700 text-white">
