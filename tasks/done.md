@@ -56,4 +56,15 @@
 - [x] Create UI for viewing history
 - [x] Integrate history with AI result components
 
+### Layer 2 - Affiliate System
+- [x] Create `Product` model in Prisma
+- [x] Implement Affiliate recommendation engine/logic
+- [x] Create Affiliate UI component (Recommendation Card)
+- [x] Integrate recommendation component with AI results
+
+### Layer Refinement — SEO Foundation (Completed)
+- [x] Setup dynamic `sitemap.ts`
+- [x] Create `robots.ts`
+- [x] Basic Metadata & Open Graph in layout
+
 # Phase 3: Status = ⏳ IN PROGRESS

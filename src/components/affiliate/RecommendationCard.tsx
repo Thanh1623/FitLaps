@@ -6,7 +6,7 @@ interface Product {
   id: string;
   name: string;
   description: string | null;
-  price: number | null;
+  price: any | null; 
   affiliateLink: string;
   category: string | null;
 }
@@ -21,7 +21,7 @@ export function RecommendationCard({ product }: RecommendationCardProps) {
       <div className="flex justify-between items-start">
         <h4 className="font-bold text-lg text-slate-900 dark:text-white">{product.name}</h4>
         <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-100 dark:bg-emerald-900/30 px-2 py-1 rounded">
-          ${product.price}
+          ${product.price?.toString()}
         </span>
       </div>
       
@@ -35,7 +35,7 @@ export function RecommendationCard({ product }: RecommendationCardProps) {
         rel="noopener noreferrer"
         className="w-full"
       >
-        <Button variant="outline" className="w-full gap-2">
+        <Button variant="default" className="w-full gap-2 bg-emerald-600 hover:bg-emerald-700 text-white">
           View Product <ExternalLink className="w-4 h-4" />
         </Button>
       </a>

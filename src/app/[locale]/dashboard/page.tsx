@@ -10,6 +10,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('title'),
     description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: `https://fitlaps.com/${locale}/dashboard`,
+      type: "website",
+    },
   };
 }
 

@@ -3,6 +3,7 @@ import { ZodError } from 'zod';
 import { askAI } from '@/services/ai';
 import { WorkoutRequestSchema } from '@/lib/schemas/workout';
 import { WorkoutPlanSchema } from '@/lib/schemas/ai-workout';
+import { getAffiliateRecommendations } from '@/services/affiliate';
 
 export async function POST(req: Request) {
   try {
@@ -56,7 +57,10 @@ export async function POST(req: Request) {
     // Validate the AI response
     const validatedPlan = WorkoutPlanSchema.parse(parsedPlan);
 
-    return NextResponse.json({ success: true, data: validatedPlan });
+    // Get recommendations
+    const recommendations = await getAffiliateRecommendations(validatedPlan);
+
+    return NextResponse.json({ success: true, data: validatedPlan, recommendations });
   } catch (error) {
     console.error('Workout generation error detail:', error);
     if (error instanceof ZodError) {

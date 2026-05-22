@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { format } from "date-fns";
 import { Dumbbell, Calendar, Target, Clock, Zap, Utensils, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { getAffiliateRecommendations } from "@/services/affiliate";
+import { RecommendationCard } from "@/components/affiliate/RecommendationCard";
 
 export default async function HistoryPage({
   params,
@@ -20,7 +22,14 @@ export default async function HistoryPage({
   const workoutPlans = history.filter(item => item.planType === 'workout');
   const mealPlans = history.filter(item => item.planType === 'meal');
 
-  const plansToDisplay = activeTab === 'workout' ? workoutPlans : mealPlans;
+  const basePlans = activeTab === 'workout' ? workoutPlans : mealPlans;
+
+  const plansToDisplay = await Promise.all(
+    basePlans.map(async (item) => {
+      const recommendations = await getAffiliateRecommendations(item.planData);
+      return { ...item, recommendations };
+    })
+  );
 
   return (
     <main className="min-h-screen py-16 px-4 bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
@@ -155,10 +164,23 @@ export default async function HistoryPage({
                                             <div className="text-xs text-slate-500">
                                                 {meal.calories} kcal | P: {meal.protein}g | C: {meal.carbs}g | F: {meal.fat}g
                                             </div>
+                                            {meal.recipe && <p className="mt-2 text-slate-500 italic">{meal.recipe}</p>}
                                         </li>
                                     ))}
                                     </ul>
                                 </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Recommendations Section */}
+                    {item.recommendations && item.recommendations.length > 0 && (
+                        <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
+                            <h4 className="font-semibold text-slate-900 dark:text-white mb-4">Recommended Products</h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {item.recommendations.map((product: any) => (
+                                    <RecommendationCard key={product.id} product={product} />
                                 ))}
                             </div>
                         </div>

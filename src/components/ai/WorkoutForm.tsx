@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Dumbbell, Save, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { savePlanHistory } from "@/app/actions/history";
+import { RecommendationCard } from "@/components/affiliate/RecommendationCard";
 
 export default function WorkoutForm() {
   const t = useTranslations("WorkoutForm");
@@ -19,6 +20,7 @@ export default function WorkoutForm() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [result, setResult] = useState<any>(null);
+  const [recommendations, setRecommendations] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const handleSave = async () => {
@@ -92,6 +94,7 @@ export default function WorkoutForm() {
       }
 
       setResult(json.data);
+      setRecommendations(json.recommendations || []);
     } catch (error) {
       console.error(error);
       setError("Network error. Please try again.");
@@ -121,7 +124,7 @@ export default function WorkoutForm() {
         <CardContent>
           {/* Decorative SVG Illustration */}
           <div className="flex justify-center mb-6">
-            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-emerald-500/20">
+            <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-emerald-500/20" aria-hidden="true">
               <path d="M6 12H18M10 9V15M14 9V15M5 6H19M5 18H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
@@ -202,6 +205,7 @@ export default function WorkoutForm() {
                 <div className="space-y-6">
                     {result.workoutPlan.days?.map((dayPlan: any, index: number) => (
                         <div key={index} className="bg-slate-200 dark:bg-slate-950 p-5 rounded-2xl border border-emerald-500/10">
+                            {/* ... (existing code for dayPlan) */}
                             <div className="flex justify-between items-center mb-3">
                                 <h4 className="text-lg font-semibold text-emerald-700 dark:text-emerald-300">{dayPlan.day}</h4>
                                 <span className="text-xs px-2 py-1 bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 rounded-full">{dayPlan.targetMuscleGroup}</span>
@@ -224,6 +228,18 @@ export default function WorkoutForm() {
                         </div>
                     ))}
                 </div>
+
+                {/* Recommendations Section */}
+                {recommendations && recommendations.length > 0 && (
+                    <div className="mt-8 pt-6 border-t border-slate-300 dark:border-slate-800">
+                        <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-4">Recommended for you</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {recommendations.map((product) => (
+                                <RecommendationCard key={product.id} product={product} />
+                            ))}
+                        </div>
+                    </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
