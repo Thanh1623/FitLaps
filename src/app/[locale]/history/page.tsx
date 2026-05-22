@@ -27,7 +27,12 @@ export default async function HistoryPage({
   const plansToDisplay = await Promise.all(
     basePlans.map(async (item) => {
       const recommendations = await getAffiliateRecommendations(item.planData);
-      return { ...item, recommendations };
+      // Serialize Decimal fields to string/number
+      const serializedRecommendations = recommendations.map((product) => ({
+        ...product,
+        price: product.price ? product.price.toString() : null,
+      }));
+      return { ...item, recommendations: serializedRecommendations };
     })
   );
 
