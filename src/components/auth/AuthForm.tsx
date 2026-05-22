@@ -27,6 +27,9 @@ export function AuthForm() {
 
   return (
     <div className="space-y-4">
+        <h2 className="text-2xl font-bold text-center text-slate-900 dark:text-white">
+            {isLogin ? 'Sign In' : 'Create Account'}
+        </h2>
         <form action={handleSubmit} className="space-y-4">
         <Input name="email" type="email" placeholder="Email" required />
         <Input name="password" type="password" placeholder="Password" required />
@@ -37,7 +40,7 @@ export function AuthForm() {
         </Button>
         </form>
         <Button variant="outline" className="w-full" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Need an account? Sign Up' : 'Already have an account? Sign In'}
+            {isLogin ? 'Need an account?' : 'Already have an account?'}
         </Button>
     </div>
   )

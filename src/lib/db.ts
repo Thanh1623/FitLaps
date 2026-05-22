@@ -9,7 +9,12 @@ const getPrisma = () => {
     if (globalForPrisma.prisma) return globalForPrisma.prisma
 
     const connectionString = process.env.DATABASE_URL
-    const pool = new Pool({ connectionString })
+    const pool = new Pool({ 
+        connectionString,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    })
     const adapter = new PrismaPg(pool)
     
     globalForPrisma.prisma = new PrismaClient({ adapter })

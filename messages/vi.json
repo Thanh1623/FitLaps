@@ -43,6 +43,11 @@
     "title": "AI Tạo Lịch Ăn | FitLaps",
     "description": "Tạo kế hoạch ăn uống cá nhân hóa bằng AI dựa trên mục tiêu và chế độ ăn kiêng của bạn."
   },
+  "Header": {
+    "title": "FitLaps",
+    "home": "Trang chủ",
+    "dashboard": "Bảng điều khiển"
+  },
   "BMIMetadata": {
     "title": "Tính BMI | FitLaps",
     "description": "Tính chỉ số khối cơ thể (BMI) của bạn dễ dàng với máy tính trực tuyến chính xác của chúng tôi."

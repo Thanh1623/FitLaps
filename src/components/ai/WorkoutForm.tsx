@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/CustomSelect";
@@ -14,6 +14,7 @@ import { savePlanHistory } from "@/app/actions/history";
 export default function WorkoutForm() {
   const t = useTranslations("WorkoutForm");
   const { locale } = useParams();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -27,13 +28,28 @@ export default function WorkoutForm() {
         setSaved(true);
     } catch (e) {
         console.error(e);
-        setError("You must be logged in to save plans. Please sign in.");
+        router.push(`/${locale}/auth`);
     } finally {
         setSaving(false);
     }
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const fetchWithRetry = async (url: string, options: RequestInit, retries = 1): Promise<Response> => {
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok && retries > 0) {
+                return fetchWithRetry(url, options, retries - 1);
+            }
+            return response;
+        } catch (error) {
+            if (retries > 0) {
+                return fetchWithRetry(url, options, retries - 1);
+            }
+            throw error;
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -52,7 +68,7 @@ export default function WorkoutForm() {
     };
 
     try {
-      const response = await fetch("/api/workout", {
+      const response = await fetchWithRetry("/api/workout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -60,7 +76,7 @@ export default function WorkoutForm() {
 
       const contentType = response.headers.get("content-type") ?? "";
       if (!contentType.includes("application/json")) {
-        setError("Server returned an unexpected response format.");
+        setError("Server returned an unexpected response format. Please try again.");
         return;
       }
 
@@ -71,7 +87,7 @@ export default function WorkoutForm() {
         if (json.details && Array.isArray(json.details)) {
           errorMessage += ": " + json.details.map((d: any) => `${d.path}: ${d.message}`).join(", ");
         }
-        setError(errorMessage);
+        setError(errorMessage + " (Please try again)");
         return;
       }
 
