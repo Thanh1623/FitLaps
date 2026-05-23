@@ -58,9 +58,18 @@ export async function getAffiliateRecommendations(plan: any) {
     }
 
     // Search for products that match categories
-    return await prisma.product.findMany({
+    const products = await prisma.product.findMany({
         where: {
             category: { in: uniqueCategories as string[] }
         }
     })
+
+    // If still no products found, return popular (all) products
+    if (products.length === 0) {
+        return await prisma.product.findMany({
+            take: 3,
+        })
+    }
+
+    return products;
 }

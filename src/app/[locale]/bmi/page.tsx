@@ -8,9 +8,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: t('title'),
     description: t('description'),
     openGraph: {
-      title: t('title'),
-      description: t('description'),
-      type: "website",
+        title: t('title'),
+        description: t('description'),
+        url: `https://fitlaps.com/${locale}/bmi`,
+        type: "website",
     },
   };
 }

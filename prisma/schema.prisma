@@ -63,9 +63,19 @@ model Product {
   affiliateLink String   @map("affiliate_link")
   category      String?
   createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  clickLogs ClickLog[]
 
   @@map("products")
+}
+
+model ClickLog {
+  id        String   @id @default(cuid())
+  productId String   @map("product_id")
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("click_logs")
 }
 
 model VerificationToken {
