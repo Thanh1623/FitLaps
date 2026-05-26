@@ -1,7 +1,11 @@
 import { prisma } from '@/lib/db'
 
+export async function getProductById(id: string) {
+    return await prisma.product.findUnique({
+        where: { id }
+    });
+}
 export async function getAffiliateRecommendations(plan: any) {
-    // Map muscle groups/goals/restrictions to product categories
     const categoryMapping: Record<string, string[]> = {
         // Workout mappings
         'chest': ['equipment', 'protein'],
@@ -60,7 +64,7 @@ export async function getAffiliateRecommendations(plan: any) {
     // Search for products that match categories
     const products = await prisma.product.findMany({
         where: {
-            category: { in: uniqueCategories as string[] }
+            category: { in: uniqueCategories as string[], mode: 'insensitive' }
         }
     })
 

@@ -26,21 +26,33 @@ export function AuthForm() {
   }
 
   return (
-    <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-center text-slate-900 dark:text-white">
-            {isLogin ? 'Sign In' : 'Create Account'}
+    <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+        <h2 className="text-3xl font-extrabold text-center text-slate-900 dark:text-white">
+            {isLogin ? 'Welcome Back' : 'Create Account'}
         </h2>
         <form action={handleSubmit} className="space-y-4">
-        <Input name="email" type="email" placeholder="Email" required />
-        <Input name="password" type="password" placeholder="Password" required />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        {message && <p className="text-emerald-500 text-sm">{message}</p>}
-        <Button type="submit" className="w-full">
+        <Input name="email" type="email" placeholder="Email" required className="bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl" />
+        <Input name="password" type="password" placeholder="Password" required className="bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl" />
+        {error && <p className="text-red-500 text-sm bg-red-50 dark:bg-red-900/20 p-2 rounded-lg text-center">{error}</p>}
+        {message && <p className="text-emerald-500 text-sm bg-emerald-50 dark:bg-emerald-900/20 p-2 rounded-lg text-center">{message}</p>}
+        <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl py-6 text-lg font-bold">
             {isLogin ? 'Sign In' : 'Sign Up'}
         </Button>
         </form>
-        <Button variant="outline" className="w-full" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Need an account?' : 'Already have an account?'}
+        <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-slate-200 dark:border-slate-700"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white dark:bg-slate-900 text-slate-500">Or</span>
+            </div>
+        </div>
+        <Button 
+            variant="outline" 
+            className="w-full rounded-xl py-6 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300" 
+            onClick={() => setIsLogin(!isLogin)}
+        >
+            {isLogin ? 'Need an account? Sign Up' : 'Already have an account? Sign In'}
         </Button>
     </div>
   )

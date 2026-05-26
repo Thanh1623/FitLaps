@@ -22,6 +22,9 @@ export default async function AdminDashboardLayout({ children }: { children: Rea
             <Link href="/admin/dashboard" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 hover:text-blue-600">
               <LayoutDashboard size={18} /> Dashboard
             </Link>
+            <Link href="/admin/dashboard/blog" className="flex items-center gap-2 text-slate-700 dark:text-slate-300 hover:text-blue-600">
+              <Package size={18} /> Blog
+            </Link>
             <form action={async () => {
                 'use server';
                 (await cookies()).delete('admin_session');

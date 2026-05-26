@@ -49,7 +49,19 @@
     "dashboard": "Dashboard"
   },
   "Footer": {
-    "copyright": "© 2026 FitLaps"
+    "description": "Your AI-powered fitness companion.",
+    "links_title": "Resources",
+    "links": {
+      "dashboard": "Dashboard",
+      "workout": "Workout",
+      "meal_planner": "Meal Planner"
+    },
+    "legal_title": "Legal",
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "copyright": "© 2026 FitLaps. All rights reserved."
   },
   "BMIMetadata": {
     "title": "BMI Calculator | FitLaps",

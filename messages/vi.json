@@ -65,7 +65,19 @@
     "description": "Truy cập tất cả các công cụ thể hình của bạn, bao gồm BMI, TDEE, Macro, Lịch tập và Lịch ăn AI."
   },
   "Footer": {
-    "copyright": "© 2026 FitLaps"
+    "description": "Người bạn đồng hành thể hình thông minh của bạn.",
+    "links_title": "Tài nguyên",
+    "links": {
+      "dashboard": "Bảng điều khiển",
+      "workout": "Tập luyện",
+      "meal_planner": "Lịch ăn"
+    },
+    "legal_title": "Pháp lý",
+    "legal": {
+      "privacy": "Chính sách bảo mật",
+      "terms": "Điều khoản dịch vụ"
+    },
+    "copyright": "© 2026 FitLaps. Đã đăng ký bản quyền."
   },
   "BMICalculator": {
     "title": "Tính BMI",

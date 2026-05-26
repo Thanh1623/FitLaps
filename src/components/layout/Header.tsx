@@ -10,6 +10,8 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
 
+  if (pathname.includes("/auth") || pathname.includes("/admin/login")) return null;
+
   const switchLocale = (newLocale: 'en' | 'vi') => {
     router.replace(pathname, { locale: newLocale });
   };
@@ -18,6 +20,7 @@ export default function Header() {
     { href: "/", label: t("home") },
     { href: "/dashboard", label: t("dashboard") },
     { href: "/history", label: "History" },
+    { href: "/blog", label: "Blog" },
   ];
 
   return (

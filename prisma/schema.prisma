@@ -61,6 +61,7 @@ model Product {
   description   String?
   price         Decimal? @db.Decimal(10, 2)
   affiliateLink String   @map("affiliate_link")
+  imageUrl      String?  @map("image_url")
   category      String?
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -96,4 +97,16 @@ model PlanHistory {
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("plan_history")
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String   @db.Text
+  published Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("posts")
 }

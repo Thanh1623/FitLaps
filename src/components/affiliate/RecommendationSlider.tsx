@@ -10,6 +10,7 @@ interface Product {
   description: string | null;
   price: any | null;
   affiliateLink: string;
+  imageUrl: string | null;
   category: string | null;
 }
 
@@ -36,7 +37,7 @@ export function RecommendationSlider({ products }: RecommendationSliderProps) {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"
         >
           {paginatedProducts.map((product) => (
             <RecommendationCard key={product.id} product={product} />
