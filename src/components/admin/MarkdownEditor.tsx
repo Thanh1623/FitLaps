@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false });
 
@@ -13,7 +13,20 @@ interface Props {
 }
 
 export default function MarkdownEditor({ name, defaultValue, placeholder }: Props) {
-  
+  const [editorInstance, setEditorInstance] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [width, setWidth] = useState("500");
+  const [selectedStyles, setSelectedStyles] = useState<string[]>(["rounded-lg", "shadow-lg", "border"]);
+
+  const styleOptions = [
+    { label: "Bo góc (Rounded)", value: "rounded-lg" },
+    { label: "Đổ bóng (Shadow)", value: "shadow-lg" },
+    { label: "Khung viền (Border)", value: "border" },
+    { label: "Đen trắng (Grayscale)", value: "grayscale" },
+    { label: "Độ mờ (Opacity)", value: "opacity-50" },
+  ];
+
   const uploadImage = async (file: File, onSuccess: (url: string) => void, onError: (error: string) => void) => {
     const formData = new FormData();
     formData.append('file', file);
@@ -33,10 +46,26 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     }
   };
 
+  const handleInsertImage = () => {
+    if (!editorInstance) {
+      console.error("Editor instance not found");
+      return;
+    }
+    const cm = editorInstance.codemirror;
+    const cursor = cm.getCursor();
+    const classAttr = selectedStyles.length > 0 ? `class="${selectedStyles.join(' ')}" ` : "";
+    const widthAttr = width ? `width="${width}" ` : "";
+    
+    const imgTag = `<div align="center"><img src="${imageUrl}" ${widthAttr}${classAttr}/></div>`;
+    cm.replaceRange(imgTag, cursor);
+    setIsModalOpen(false);
+  };
+
   return (
-    <div className="prose dark:prose-invert max-w-none">
+    <div className="prose dark:prose-invert max-w-none relative">
       <SimpleMDE
         value={defaultValue || ""}
+        getMdeInstance={(instance) => setEditorInstance(instance)}
         onChange={(value) => {
           const textarea = document.getElementsByName(name)[0] as HTMLTextAreaElement;
           if (textarea) textarea.value = value;
@@ -58,9 +87,8 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
                   const file = (e.target as HTMLInputElement).files?.[0];
                   if (file) {
                     uploadImage(file, (url) => {
-                      const cm = editor.codemirror;
-                      const cursor = cm.getCursor();
-                      cm.replaceRange(`![](${url})`, cursor);
+                      setImageUrl(url);
+                      setIsModalOpen(true);
                     }, (err) => alert(err));
                   }
                 };
@@ -72,9 +100,48 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
             "|", "preview", "side-by-side", "fullscreen"
           ],
         } as any}
-
       />
-      {/* Hidden textarea to hold the value for form submission */}
+
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-2xl w-full max-w-sm space-y-4">
+            <h3 className="font-bold text-lg">Cấu hình ảnh</h3>
+            
+            <div className="space-y-2">
+                <label className="text-sm font-medium">Chiều rộng (px):</label>
+                <input 
+                    type="number" 
+                    value={width} 
+                    onChange={(e) => setWidth(e.target.value)}
+                    className="w-full p-2 border rounded-lg dark:bg-slate-800"
+                />
+            </div>
+
+            <div className="space-y-2">
+                <label className="text-sm font-medium">Kiểu dáng:</label>
+                {styleOptions.map((opt) => (
+                    <label key={opt.value} className="flex items-center gap-2 text-sm cursor-pointer">
+                        <input 
+                            type="checkbox" 
+                            checked={selectedStyles.includes(opt.value)}
+                            onChange={(e) => {
+                                if (e.target.checked) setSelectedStyles([...selectedStyles, opt.value]);
+                                else setSelectedStyles(selectedStyles.filter(s => s !== opt.value));
+                            }}
+                        />
+                        {opt.label}
+                    </label>
+                ))}
+            </div>
+
+            <div className="flex gap-2 pt-4">
+                <button onClick={() => setIsModalOpen(false)} className="flex-1 p-2 rounded-lg bg-slate-100 dark:bg-slate-800">Hủy</button>
+                <button onClick={handleInsertImage} className="flex-1 p-2 rounded-lg bg-emerald-600 text-white">Chèn ảnh</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <textarea name={name} className="hidden" defaultValue={defaultValue} />
     </div>
   );
