@@ -14,6 +14,7 @@ interface Props {
 
 export default function MarkdownEditor({ name, defaultValue, placeholder }: Props) {
   const editorInstanceRef = useRef<any>(null);
+  const [currentValue, setCurrentValue] = useState(defaultValue || "");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [width, setWidth] = useState("500");
@@ -59,17 +60,23 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     const imgTag = `<div align="center"><img src="${imageUrl}" ${widthAttr}${classAttr}/></div>`;
     cm.replaceRange(imgTag, cursor);
     setIsModalOpen(false);
+    
+    // Update internal state
+    const newValue = cm.getValue();
+    setCurrentValue(newValue);
   };
 
   return (
     <div className="prose dark:prose-invert max-w-none relative">
       <SimpleMDE
-        value={defaultValue || ""}
+        value={currentValue}
         getMdeInstance={(instance) => { editorInstanceRef.current = instance; }}
         onChange={(value) => {
+          setCurrentValue(value);
           const textarea = document.getElementsByName(name)[0] as HTMLTextAreaElement;
           if (textarea) textarea.value = value;
         }}
+
         options={{
           placeholder: placeholder || "",
           spellChecker: false,
