@@ -124,6 +124,7 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
   return (
     <div className="prose dark:prose-invert max-w-none relative">
       <SimpleMDE
+        key={name} // Thêm key để React tái sử dụng instance khi cần
         defaultValue={defaultValue || ""}
         getMdeInstance={(instance) => { editorInstanceRef.current = instance; }}
         onChange={(value) => {
