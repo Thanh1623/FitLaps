@@ -6,16 +6,13 @@ import { useState, useRef } from "react";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false });
 
-interface Props {
-  name: string;
-  defaultValue?: string;
-  placeholder?: string;
+interface ModalProps {
+  imageUrl: string;
+  onInsert: (width: string, style: string) => void;
+  onClose: () => void;
 }
 
-export default function MarkdownEditor({ name, defaultValue, placeholder }: Props) {
-  const editorInstanceRef = useRef<any>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [imageUrl, setImageUrl] = useState("");
+function ImageConfigModal({ imageUrl, onInsert, onClose }: ModalProps) {
   const [width, setWidth] = useState("500");
   const [selectedStyle, setSelectedStyle] = useState("rounded-lg shadow-lg border");
 
@@ -26,6 +23,57 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     { label: "Ảnh mờ", value: "opacity-50" },
     { label: "Không style", value: "" },
   ];
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4">
+      <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-2xl w-full max-w-sm space-y-4">
+        <h3 className="font-bold text-lg">Cấu hình ảnh</h3>
+        
+        <div className="space-y-2">
+            <label className="text-sm font-medium">Chiều rộng (px):</label>
+            <input 
+                type="number" 
+                value={width} 
+                onChange={(e) => setWidth(e.target.value)}
+                className="w-full p-2 border rounded-lg dark:bg-slate-800"
+            />
+        </div>
+
+        <div className="space-y-2">
+            <label className="text-sm font-medium">Kiểu dáng:</label>
+            {stylePresets.map((opt) => (
+                <label key={opt.value} className="flex items-center gap-2 text-sm cursor-pointer">
+                    <input 
+                        type="radio" 
+                        name="stylePreset"
+                        checked={selectedStyle === opt.value}
+                        onChange={() => setSelectedStyle(opt.value)}
+                        className="text-emerald-600"
+                    />
+                    {opt.label}
+                </label>
+            ))}
+        </div>
+
+        <div className="flex gap-2 pt-4">
+            <button onClick={onClose} className="flex-1 p-2 rounded-lg bg-slate-100 dark:bg-slate-800">Hủy</button>
+            <button onClick={() => onInsert(width, selectedStyle)} className="flex-1 p-2 rounded-lg bg-emerald-600 text-white">Chèn ảnh</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface Props {
+  name: string;
+  defaultValue?: string;
+  placeholder?: string;
+}
+
+export default function MarkdownEditor({ name, defaultValue, placeholder }: Props) {
+  const editorInstanceRef = useRef<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
 
   const uploadImage = async (file: File, onSuccess: (url: string) => void, onError: (error: string) => void) => {
     const formData = new FormData();
@@ -46,14 +94,11 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     }
   };
 
-  const handleInsertImage = () => {
-    if (!editorInstanceRef.current) {
-      console.error("Editor instance not found");
-      return;
-    }
+  const handleInsert = (width: string, style: string) => {
+    if (!editorInstanceRef.current) return;
     const cm = editorInstanceRef.current.codemirror;
     const cursor = cm.getCursor();
-    const classAttr = selectedStyle ? `class="${selectedStyle}" ` : "";
+    const classAttr = style ? `class="${style}" ` : "";
     const widthAttr = width ? `width="${width}" ` : "";
     
     const imgTag = `<div align="center"><img src="${imageUrl}" ${widthAttr}${classAttr}/></div>`;
@@ -70,7 +115,6 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
           const textarea = document.getElementsByName(name)[0] as HTMLTextAreaElement;
           if (textarea) textarea.value = value;
         }}
-
 
         options={{
           placeholder: placeholder || "",
@@ -105,48 +149,17 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
         } as any}
       />
 
-
-
       {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-2xl w-full max-w-sm space-y-4">
-            <h3 className="font-bold text-lg">Cấu hình ảnh</h3>
-            
-            <div className="space-y-2">
-                <label className="text-sm font-medium">Chiều rộng (px):</label>
-                <input 
-                    type="number" 
-                    value={width} 
-                    onChange={(e) => setWidth(e.target.value)}
-                    className="w-full p-2 border rounded-lg dark:bg-slate-800"
-                />
-            </div>
-
-            <div className="space-y-2">
-                <label className="text-sm font-medium">Kiểu dáng:</label>
-                {stylePresets.map((opt) => (
-                    <label key={opt.value} className="flex items-center gap-2 text-sm cursor-pointer">
-                        <input 
-                            type="radio" 
-                            name="stylePreset"
-                            checked={selectedStyle === opt.value}
-                            onChange={() => setSelectedStyle(opt.value)}
-                            className="text-emerald-600"
-                        />
-                        {opt.label}
-                    </label>
-                ))}
-            </div>
-
-            <div className="flex gap-2 pt-4">
-                <button onClick={() => setIsModalOpen(false)} className="flex-1 p-2 rounded-lg bg-slate-100 dark:bg-slate-800">Hủy</button>
-                <button onClick={handleInsertImage} className="flex-1 p-2 rounded-lg bg-emerald-600 text-white">Chèn ảnh</button>
-            </div>
-          </div>
-        </div>
+        <ImageConfigModal
+            imageUrl={imageUrl}
+            onInsert={handleInsert}
+            onClose={() => setIsModalOpen(false)}
+        />
       )}
 
       <textarea name={name} className="hidden" defaultValue={defaultValue} />
     </div>
   );
 }
+
+
