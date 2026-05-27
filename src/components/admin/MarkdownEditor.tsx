@@ -97,12 +97,17 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
   const handleInsert = (width: string, style: string) => {
     if (!editorInstanceRef.current) return;
     const cm = editorInstanceRef.current.codemirror;
-    const cursor = cm.getCursor();
+    
     const classAttr = style ? `class="${style}" ` : "";
     const widthAttr = width ? `width="${width}" ` : "";
     
     const imgTag = `<div align="center"><img src="${imageUrl}" ${widthAttr}${classAttr}/></div>`;
-    cm.replaceRange(imgTag, cursor);
+    
+    // Sử dụng replaceSelection để chèn vào đúng vị trí con trỏ
+    cm.replaceSelection(imgTag);
+    // Đảm bảo focus lại trình soạn thảo
+    cm.focus();
+    
     setIsModalOpen(false);
   };
 
