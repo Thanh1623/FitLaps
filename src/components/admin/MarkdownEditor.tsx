@@ -17,14 +17,14 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [width, setWidth] = useState("500");
-  const [selectedStyles, setSelectedStyles] = useState<string[]>(["rounded-lg", "shadow-lg", "border"]);
+  const [selectedStyle, setSelectedStyle] = useState("rounded-lg shadow-lg border");
 
-  const styleOptions = [
-    { label: "Bo góc (Rounded)", value: "rounded-lg" },
-    { label: "Đổ bóng (Shadow)", value: "shadow-lg" },
-    { label: "Khung viền (Border)", value: "border" },
-    { label: "Đen trắng (Grayscale)", value: "grayscale" },
-    { label: "Độ mờ (Opacity)", value: "opacity-50" },
+  const stylePresets = [
+    { label: "Mặc định (Bo góc + Đổ bóng + Khung)", value: "rounded-lg shadow-lg border" },
+    { label: "Bo góc nhẹ", value: "rounded-md" },
+    { label: "Bo tròn hoàn toàn", value: "rounded-full" },
+    { label: "Ảnh mờ", value: "opacity-50" },
+    { label: "Không style", value: "" },
   ];
 
   const uploadImage = async (file: File, onSuccess: (url: string) => void, onError: (error: string) => void) => {
@@ -53,7 +53,7 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     }
     const cm = editorInstanceRef.current.codemirror;
     const cursor = cm.getCursor();
-    const classAttr = selectedStyles.length > 0 ? `class="${selectedStyles.join(' ')}" ` : "";
+    const classAttr = selectedStyle ? `class="${selectedStyle}" ` : "";
     const widthAttr = width ? `width="${width}" ` : "";
     
     const imgTag = `<div align="center"><img src="${imageUrl}" ${widthAttr}${classAttr}/></div>`;
@@ -119,15 +119,14 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
 
             <div className="space-y-2">
                 <label className="text-sm font-medium">Kiểu dáng:</label>
-                {styleOptions.map((opt) => (
+                {stylePresets.map((opt) => (
                     <label key={opt.value} className="flex items-center gap-2 text-sm cursor-pointer">
                         <input 
-                            type="checkbox" 
-                            checked={selectedStyles.includes(opt.value)}
-                            onChange={(e) => {
-                                if (e.target.checked) setSelectedStyles([...selectedStyles, opt.value]);
-                                else setSelectedStyles(selectedStyles.filter(s => s !== opt.value));
-                            }}
+                            type="radio" 
+                            name="stylePreset"
+                            checked={selectedStyle === opt.value}
+                            onChange={() => setSelectedStyle(opt.value)}
+                            className="text-emerald-600"
                         />
                         {opt.label}
                     </label>
