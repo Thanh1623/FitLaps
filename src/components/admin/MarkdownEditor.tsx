@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function MarkdownEditor({ name, defaultValue, placeholder }: Props) {
-  const [editorInstance, setEditorInstance] = useState<any>(null);
+  const editorInstanceRef = useRef<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [width, setWidth] = useState("500");
@@ -47,11 +47,11 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
   };
 
   const handleInsertImage = () => {
-    if (!editorInstance) {
+    if (!editorInstanceRef.current) {
       console.error("Editor instance not found");
       return;
     }
-    const cm = editorInstance.codemirror;
+    const cm = editorInstanceRef.current.codemirror;
     const cursor = cm.getCursor();
     const classAttr = selectedStyles.length > 0 ? `class="${selectedStyles.join(' ')}" ` : "";
     const widthAttr = width ? `width="${width}" ` : "";
@@ -65,7 +65,7 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     <div className="prose dark:prose-invert max-w-none relative">
       <SimpleMDE
         value={defaultValue || ""}
-        getMdeInstance={(instance) => setEditorInstance(instance)}
+        getMdeInstance={(instance) => { editorInstanceRef.current = instance; }}
         onChange={(value) => {
           const textarea = document.getElementsByName(name)[0] as HTMLTextAreaElement;
           if (textarea) textarea.value = value;
