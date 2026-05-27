@@ -72,10 +72,12 @@ interface Props {
 
 export default function MarkdownEditor({ name, defaultValue, placeholder }: Props) {
   const editorInstanceRef = useRef<any>(null);
+  const savedCursorRef = useRef<any>(null); // Thêm ref để lưu vị trí con trỏ
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
 
   const uploadImage = async (file: File, onSuccess: (url: string) => void, onError: (error: string) => void) => {
+    // ... (giữ nguyên)
     const formData = new FormData();
     formData.append('file', file);
 
@@ -103,12 +105,16 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     
     const imgTag = `<div align="center"><img src="${imageUrl}" ${widthAttr}${classAttr}/></div>`;
     
-    // Sử dụng replaceSelection để chèn vào đúng vị trí con trỏ
-    cm.replaceSelection(imgTag);
-    // Đảm bảo focus lại trình soạn thảo
-    cm.focus();
+    // Sử dụng vị trí con trỏ đã lưu thay vì dựa vào focus hiện tại
+    if (savedCursorRef.current) {
+        cm.replaceRange(imgTag, savedCursorRef.current);
+    } else {
+        cm.replaceSelection(imgTag);
+    }
     
+    cm.focus();
     setIsModalOpen(false);
+    savedCursorRef.current = null; // Reset vị trí sau khi chèn
   };
 
   return (
@@ -132,6 +138,7 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
               name: "custom-image",
               action: (editor: any) => {
                 editorInstanceRef.current = editor;
+                savedCursorRef.current = editor.codemirror.getCursor(); // Lưu vị trí con trỏ tại đây
                 const input = document.createElement("input");
                 input.type = "file";
                 input.accept = "image/*";
