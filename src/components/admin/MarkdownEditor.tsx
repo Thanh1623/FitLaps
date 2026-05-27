@@ -75,9 +75,10 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
   const savedCursorRef = useRef<any>(null); // Thêm ref để lưu vị trí con trỏ
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Thêm state loading
 
   const uploadImage = async (file: File, onSuccess: (url: string) => void, onError: (error: string) => void) => {
-    // ... (giữ nguyên)
+    setIsLoading(true); // Bật loading
     const formData = new FormData();
     formData.append('file', file);
 
@@ -93,8 +94,11 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
       onSuccess(data.url);
     } catch (error) {
       onError('Upload failed');
+    } finally {
+      setIsLoading(false); // Tắt loading
     }
   };
+
 
   const handleInsert = (width: string, style: string) => {
     if (!editorInstanceRef.current) return;
@@ -167,6 +171,14 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
             onInsert={handleInsert}
             onClose={() => setIsModalOpen(false)}
         />
+      )}
+
+      {isLoading && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/20">
+          <div className="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-xl">
+            <p>Đang tải ảnh...</p>
+          </div>
+        </div>
       )}
 
       <textarea name={name} className="hidden" defaultValue={defaultValue} />
