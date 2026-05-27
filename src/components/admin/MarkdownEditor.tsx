@@ -15,7 +15,7 @@ interface Props {
 export default function MarkdownEditor({ name, defaultValue, placeholder }: Props) {
   const editorInstanceRef = useRef<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [imageUrl, setImageUrl] = useState("");
   const [width, setWidth] = useState("500");
   const [selectedStyle, setSelectedStyle] = useState("rounded-lg shadow-lg border");
 
@@ -27,20 +27,22 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     { label: "Không style", value: "" },
   ];
 
-  const uploadImage = async (file: File) => {
+  const uploadImage = async (file: File, onSuccess: (url: string) => void, onError: (error: string) => void) => {
     const formData = new FormData();
     formData.append('file', file);
+
     try {
       const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
       });
+
       if (!response.ok) throw new Error('Upload failed');
+
       const data = await response.json();
-      return data.url;
+      onSuccess(data.url);
     } catch (error) {
-      console.error(error);
-      return null;
+      onError('Upload failed');
     }
   };
 
@@ -54,14 +56,9 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     const classAttr = selectedStyle ? `class="${selectedStyle}" ` : "";
     const widthAttr = width ? `width="${width}" ` : "";
     
-    let imgTags = "";
-    imageUrls.forEach(url => {
-        imgTags += `<div align="center"><img src="${url}" ${widthAttr}${classAttr}/></div>\n`;
-    });
-
-    cm.replaceRange(imgTags, cursor);
+    const imgTag = `<div align="center"><img src="${imageUrl}" ${widthAttr}${classAttr}/></div>`;
+    cm.replaceRange(imgTag, cursor);
     setIsModalOpen(false);
-    setImageUrls([]);
   };
 
   return (
@@ -87,22 +84,13 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
                 const input = document.createElement("input");
                 input.type = "file";
                 input.accept = "image/*";
-                input.multiple = true; // <--- Enable multiple files
-                input.onchange = async (e) => {
-                  const files = (e.target as HTMLInputElement).files;
-                  if (files && files.length > 0) {
-                    const urls: string[] = [];
-                    for (let i = 0; i < files.length; i++) {
-                        const file = files.item(i);
-                        if (file) {
-                            const url = await uploadImage(file);
-                            if (url) urls.push(url);
-                        }
-                    }
-                    if (urls.length > 0) {
-                        setImageUrls(urls);
-                        setIsModalOpen(true);
-                    }
+                input.onchange = (e) => {
+                  const file = (e.target as HTMLInputElement).files?.[0];
+                  if (file) {
+                    uploadImage(file, (url) => {
+                      setImageUrl(url);
+                      setIsModalOpen(true);
+                    }, (err) => alert(err));
                   }
                 };
                 input.click();
@@ -114,6 +102,8 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
           ],
         } as any}
       />
+
+
 
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4">
