@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import "easymde/dist/easymde.min.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback, useMemo, memo } from "react";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), { ssr: false });
 
@@ -64,6 +64,21 @@ function ImageConfigModal({ imageUrl, onInsert, onClose }: ModalProps) {
   );
 }
 
+const EditorComponent = memo(({ name, defaultValue, placeholder, onInstanceCreated, onChange, toolbarOptions }: any) => {
+    return (
+        <SimpleMDE
+            defaultValue={defaultValue}
+            getMdeInstance={onInstanceCreated}
+            onChange={onChange}
+            options={{
+                placeholder: placeholder || "",
+                spellChecker: false,
+                toolbar: toolbarOptions,
+            }}
+        />
+    );
+});
+
 interface Props {
   name: string;
   defaultValue?: string;
@@ -72,13 +87,13 @@ interface Props {
 
 export default function MarkdownEditor({ name, defaultValue, placeholder }: Props) {
   const editorInstanceRef = useRef<any>(null);
-  const savedCursorRef = useRef<any>(null); // Thêm ref để lưu vị trí con trỏ
+  const savedCursorRef = useRef<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Thêm state loading
+  const [isLoading, setIsLoading] = useState(false);
 
-  const uploadImage = async (file: File, onSuccess: (url: string) => void, onError: (error: string) => void) => {
-    setIsLoading(true); // Bật loading
+  const uploadImage = useCallback(async (file: File, onSuccess: (url: string) => void, onError: (error: string) => void) => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append('file', file);
 
@@ -95,12 +110,11 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     } catch (error) {
       onError('Upload failed');
     } finally {
-      setIsLoading(false); // Tắt loading
+      setIsLoading(false);
     }
-  };
+  }, []);
 
-
-  const handleInsert = (width: string, style: string) => {
+  const handleInsert = useCallback((width: string, style: string) => {
     if (!editorInstanceRef.current) return;
     const cm = editorInstanceRef.current.codemirror;
     
@@ -109,7 +123,6 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     
     const imgTag = `<div align="center"><img src="${imageUrl}" ${widthAttr}${classAttr}/></div>`;
     
-    // Sử dụng vị trí con trỏ đã lưu thay vì dựa vào focus hiện tại
     if (savedCursorRef.current) {
         cm.replaceRange(imgTag, savedCursorRef.current);
     } else {
@@ -118,52 +131,53 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     
     cm.focus();
     setIsModalOpen(false);
-    savedCursorRef.current = null; // Reset vị trí sau khi chèn
-  };
+    savedCursorRef.current = null;
+  }, [imageUrl]);
+
+  const toolbarOptions = useMemo(() => [
+      "bold", "italic", "heading", "|", 
+      "quote", "unordered-list", "ordered-list", "|", 
+      "link", 
+      {
+        name: "custom-image",
+        action: (editor: any) => {
+          editorInstanceRef.current = editor;
+          savedCursorRef.current = editor.codemirror.getCursor();
+          const input = document.createElement("input");
+          input.type = "file";
+          input.accept = "image/*";
+          input.onchange = (e) => {
+            const file = (e.target as HTMLInputElement).files?.[0];
+            if (file) {
+              uploadImage(file, (url) => {
+                setImageUrl(url);
+                setIsModalOpen(true);
+              }, (err) => alert(err));
+            }
+          };
+          input.click();
+        },
+        className: "fa fa-image",
+        title: "Upload Image",
+      },
+      "|", "preview", "side-by-side", "fullscreen"
+  ], [uploadImage]);
+
+  const onInstanceCreated = useCallback((instance: any) => { editorInstanceRef.current = instance; }, []);
+  const onChange = useCallback((value: string) => {
+      const textarea = document.getElementsByName(name)[0] as HTMLTextAreaElement;
+      if (textarea) textarea.value = value;
+  }, [name]);
 
   return (
     <div className="prose dark:prose-invert max-w-none relative">
-      <SimpleMDE
-        key={name} // Thêm key để React tái sử dụng instance khi cần
-        defaultValue={defaultValue || ""}
-        getMdeInstance={(instance) => { editorInstanceRef.current = instance; }}
-        onChange={(value) => {
-          const textarea = document.getElementsByName(name)[0] as HTMLTextAreaElement;
-          if (textarea) textarea.value = value;
-        }}
-
-        options={{
-          placeholder: placeholder || "",
-          spellChecker: false,
-          toolbar: [
-            "bold", "italic", "heading", "|", 
-            "quote", "unordered-list", "ordered-list", "|", 
-            "link", 
-            {
-              name: "custom-image",
-              action: (editor: any) => {
-                editorInstanceRef.current = editor;
-                savedCursorRef.current = editor.codemirror.getCursor(); // Lưu vị trí con trỏ tại đây
-                const input = document.createElement("input");
-                input.type = "file";
-                input.accept = "image/*";
-                input.onchange = (e) => {
-                  const file = (e.target as HTMLInputElement).files?.[0];
-                  if (file) {
-                    uploadImage(file, (url) => {
-                      setImageUrl(url);
-                      setIsModalOpen(true);
-                    }, (err) => alert(err));
-                  }
-                };
-                input.click();
-              },
-              className: "fa fa-image",
-              title: "Upload Image",
-            },
-            "|", "preview", "side-by-side", "fullscreen"
-          ],
-        } as any}
+      <EditorComponent
+        name={name}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        onInstanceCreated={onInstanceCreated}
+        onChange={onChange}
+        toolbarOptions={toolbarOptions}
       />
 
       {isModalOpen && (
@@ -186,5 +200,3 @@ export default function MarkdownEditor({ name, defaultValue, placeholder }: Prop
     </div>
   );
 }
-
-
